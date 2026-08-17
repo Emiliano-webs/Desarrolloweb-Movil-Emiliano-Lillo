@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>Mi Empresa - Inicio</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 80px 20px;
+      border-radius: 0 0 30px 30px;
+      margin-bottom: 40px;
+    }
+    .card {
+      transition: transform 0.3s;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+    footer {
+      background-color: #2d3748;
+      color: white;
+      padding: 20px;
+      margin-top: 50px;
+      text-align: center;
+    }
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">🏢 MiEmpresa</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="index.html">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="productos.html">Productos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contacto.html">Contacto</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-outline-light btn-sm" href="login.html">🔑 Login</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO / PRINCIPAL ===== -->
+<div class="hero text-center">
+  <div class="container">
+    <h1 class="display-3 fw-bold">Hola Principal</h1>
+    <p class="lead">Bienvenido a MiEmpresa, tu solución confiable</p>
+    <div class="mt-4">
+      <a href="productos.html" class="btn btn-light btn-lg me-2">Ir a Productos</a>
+      <a href="contacto.html" class="btn btn-outline-light btn-lg">Ir a Contacto</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECCIÓN DE ENLACES RÁPIDOS ===== -->
+<div class="container">
+  <div class="row g-4">
+    <div class="col-md-3 col-6">
+      <div class="card text-center p-4">
+        <h3>🏠</h3>
+        <h5>Principal</h5>
+        <a href="index.html" class="btn btn-primary btn-sm mt-2">Ir a Principal</a>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="card text-center p-4">
+        <h3>🏢</h3>
+        <h5>Empresa</h5>
+        <a href="index.html#empresa" class="btn btn-primary btn-sm mt-2">Ir a Empresa</a>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="card text-center p-4">
+        <h3>📦</h3>
+        <h5>Productos</h5>
+        <a href="productos.html" class="btn btn-primary btn-sm mt-2">Ir a Productos</a>
+      </div>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="card text-center p-4">
+        <h3>📞</h3>
+        <h5>Contacto</h5>
+        <a href="contacto.html" class="btn btn-primary btn-sm mt-2">Ir a Contacto</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECCIÓN SOBRE LA EMPRESA ===== -->
+<div id="empresa" class="container mt-5">
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <h2>Sobre MiEmpresa</h2>
+      <p>Somos una empresa dedicada a ofrecer soluciones innovadoras para nuestros clientes. Con años de experiencia en el mercado, garantizamos calidad y confianza.</p>
+      <ul class="list-unstyled">
+        <li>✅ Compromiso con la calidad</li>
+        <li>✅ Atención personalizada</li>
+        <li>✅ Innovación constante</li>
+      </ul>
+    </div>
+    <div class="col-md-6 text-center">
+      <img src="https://via.placeholder.com/400x250/667eea/ffffff?text=MiEmpresa" alt="Empresa" class="img-fluid rounded">
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <p class="mb-0">MiEmpresa © 2026 - Todos los derechos reservados</p>
+    <small>
+      <a href="index.html" class="text-white text-decoration-none">Inicio</a> | 
+      <a href="productos.html" class="text-white text-decoration-none">Productos</a> | 
+      <a href="contacto.html" class="text-white text-decoration-none">Contacto</a>
+    </small>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
