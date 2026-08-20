@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      margin: 0;
+    }
+
+    header {
+      background-color: #699c69;
+      padding: 20px;
+    }
+
+    header h1 {
+      text-align: center;
+      color: white;
+      margin: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 10px;
+      background-color: #9cea9c;
+      margin: 0;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+    }
+
+    .contenido {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 30px;
+      background: white;
+      border: 2px solid #9cea9c;
+      border-radius: 10px;
+    }
+
+    .contenido h1 {
+      text-align: center;
+    }
+
+    .contenido label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    .contenido input,
+    .contenido textarea {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #9cea9c;
+      border-radius: 5px;
+      font-family: Arial, sans-serif;
+    }
+
+    .contenido button {
+      background-color: #699c69;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 5px;
+      margin-top: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .contenido button:hover {
+      background-color: #4a7a4a;
+    }
+
+    .informacion {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 2px solid #9cea9c;
+    }
+
+    .informacion p {
+      margin: 5px 0;
+    }
+
+    footer {
+      background-color: #699c69;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER Y MENÚ ===== -->
+<header>
+  <h1>Nombre de la Empresa</h1>
+  <nav>
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="productos.html">Productos</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="Aboutus.html">Sobre Nosotros</a></li>
+      <li><a href="Login.html">Login</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ===== CONTENIDO ===== -->
+<div class="contenido">
+  <h1>Contacto</h1>
+  <p style="text-align: center;">Déjanos tu mensaje y te responderemos pronto</p>
+
+  <!-- ===== INFORMACIÓN DE CONTACTO ===== -->
+  <div class="informacion">
+    <p><strong>Correo:</strong> correo@empresa.com</p>
+    <p><strong>Teléfono:</strong> +56 9 1234 5678</p>
+    <p><strong>Dirección:</strong> Calle Principal #123, Ciudad, País</p>
+  </div>
+
+  <!-- ===== FORMULARIO ===== -->
+  <form>
+    <label for="nombre">Nombre completo</label>
+    <input type="text" id="nombre" placeholder="Tu nombre" required>
+
+    <label for="email">Correo electrónico</label>
+    <input type="email" id="email" placeholder="tu@correo.com" required>
+
+    <label for="asunto">Asunto</label>
+    <input type="text" id="asunto" placeholder="Asunto del mensaje">
+
+    <label for="mensaje">Mensaje</label>
+    <textarea id="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+
+    <button type="submit">Enviar mensaje</button>
+  </form>
+
+  <!-- ===== BOTÓN VOLVER ===== -->
+  <div style="text-align: center; margin-top: 30px;">
+    <a href="index.html">Volver al inicio</a>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <p>Nombre de la empresa © 2024 - Todos los derechos reservados</p>
+</footer>
+
+</body>
+</html>
