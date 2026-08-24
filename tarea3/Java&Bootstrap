@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulación de Objetos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+        .section h2 {
+            color: #444;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            flex: 1 1 auto;
+            min-width: 120px;
+        }
+        button:hover {
+            background: #5a6fd6;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        .btn-danger {
+            background: #e74c6f;
+        }
+        .btn-danger:hover {
+            background: #d6305a;
+            box-shadow: 0 5px 15px rgba(231, 76, 111, 0.4);
+        }
+        .btn-success {
+            background: #2ecc71;
+        }
+        .btn-success:hover {
+            background: #27ae60;
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+        }
+        .btn-warning {
+            background: #f39c12;
+        }
+        .btn-warning:hover {
+            background: #e67e22;
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.4);
+        }
+        .output {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            min-height: 60px;
+            border: 2px dashed #ddd;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        .output.highlight {
+            border-color: #667eea;
+            background: #f0f2ff;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        .input-group input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            min-width: 150px;
+        }
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .flex-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .flex-row .section {
+            flex: 1;
+            min-width: 250px;
+        }
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+        .object-display {
+            background: #2d3436;
+            color: #dfe6e9;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+        .object-display .key {
+            color: #74b9ff;
+        }
+        .object-display .value {
+            color: #55efc4;
+        }
+        .object-display .type {
+            color: #fd79a8;
+            font-size: 11px;
+        }
+        .counter {
+            background: #667eea;
+            color: white;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Manipulacion de Objetos en JavaScript</h1>
+        <p class="subtitle">Creacion, modificacion, clonacion y eliminacion de propiedades</p>
+
+        <!-- Seccion 1: Creacion y visualizacion -->
+        <div class="section">
+            <h2>Objeto Usuario <span class="badge">Creacion</span></h2>
+            <div class="btn-group">
+                <button onclick="crearUsuario()">Crear Usuario</button>
+                <button onclick="mostrarUsuario()" class="btn-success">Mostrar Usuario</button>
+                <button onclick="agregarPropiedad()" class="btn-warning">Agregar Propiedad</button>
+                <button onclick="eliminarPropiedad()" class="btn-danger">Eliminar Propiedad</button>
+            </div>
+            <div id="outputUsuario" class="output">Presiona un boton para comenzar</div>
+        </div>
+
+        <!-- Seccion 2: Clonacion y fusion -->
+        <div class="flex-row">
+            <div class="section">
+                <h2>Clonacion <span class="badge">Spread</span></h2>
+                <div class="btn-group">
+                    <button onclick="clonarObjeto()">Clonar con Spread</button>
+                    <button onclick="mostrarClon()" class="btn-success">Ver Clon</button>
+                </div>
+                <div id="outputClon" class="output">Esperando clonacion...</div>
+            </div>
+            <div class="section">
+                <h2>Fusion <span class="badge">Merge</span></h2>
+                <div class="btn-group">
+                    <button onclick="fusionarObjetos()" class="btn-warning">Fusionar Objetos</button>
+                    <button onclick="mostrarFusion()" class="btn-success">Ver Fusion</button>
+                </div>
+                <div id="outputFusion" class="output">Esperando fusion...</div>
+            </div>
+        </div>
+
+        <!-- Seccion 3: Iteracion y metodos -->
+        <div class="section">
+            <h2>Iteracion y Metodos <span class="badge">Object.keys/values/entries</span></h2>
+            <div class="btn-group">
+                <button onclick="iterarObjeto()">Iterar Propiedades</button>
+                <button onclick="contarPropiedades()" class="btn-success">Contar Propiedades</button>
+                <button onclick="verificarPropiedad()" class="btn-warning">Verificar Propiedad</button>
+            </div>
+            <div id="outputIteracion" class="output">Presiona un boton para iterar</div>
+        </div>
+
+        <!-- Seccion 4: Manipulacion avanzada -->
+        <div class="section">
+            <h2>Manipulacion Avanzada <span class="badge">Transformacion</span></h2>
+            <div class="input-group">
+                <input type="text" id="campoNuevo" placeholder="Nombre de nueva propiedad">
+                <input type="text" id="valorNuevo" placeholder="Valor de la propiedad">
+                <button onclick="agregarPropiedadPersonalizada()" class="btn-success">Agregar Personalizada</button>
+            </div>
+            <div class="btn-group">
+                <button onclick="transformarObjeto()" class="btn-warning">Transformar Objeto</button>
+                <button onclick="resetearObjeto()" class="btn-danger">Resetear Objeto</button>
+                <button onclick="mostrarTodo()" class="btn-success">Mostrar Todo</button>
+            </div>
+            <div id="outputAvanzado" class="output">Listo para manipulacion avanzada</div>
+        </div>
+    </div>
+
+    <script>
+        // Objeto principal que vamos a manipular
+        let usuario = {
+            nombre: "Carlos",
+            edad: 28,
+            ciudad: "Madrid",
+            profesion: "Desarrollador",
+            habilidades: ["JavaScript", "Python", "SQL"],
+            activo: true
+        };
+
+        // Objeto para clonacion
+        let clonUsuario = {};
+
+        // Objeto para fusion
+        let objetoExtra = {
+            pais: "Espana",
+            idioma: "Espanol",
+            experiencia: 5
+        };
+
+        // Objeto fusionado
+        let objetoFusionado = {};
+
+        // ===== FUNCIONES =====
+
+        // 1. Crear usuario (reiniciar)
+        function crearUsuario() {
+            usuario = {
+                nombre: "Carlos",
+                edad: 28,
+                ciudad: "Madrid",
+                profesion: "Desarrollador",
+                habilidades: ["JavaScript", "Python", "SQL"],
+                activo: true
+            };
+            document.getElementById('outputUsuario').textContent = "Usuario creado correctamente";
+            document.getElementById('outputUsuario').className = "output highlight";
+            actualizarTodo();
+        }
+
+        // 2. Mostrar usuario
+        function mostrarUsuario() {
+            const output = document.getElementById('outputUsuario');
+            output.innerHTML = formatearObjeto(usuario);
+            output.className = "output highlight";
+        }
+
+        // 3. Agregar propiedad
+        function agregarPropiedad() {
+            const propiedad = prompt("Nombre de la nueva propiedad:", "telefono");
+            if (!propiedad) return;
+            const valor = prompt(`Valor para "${propiedad}":`, "123456789");
+            if (valor === null) return;
+            
+            usuario[propiedad] = valor;
+            document.getElementById('outputUsuario').textContent = `Propiedad "${propiedad}" agregada con valor: ${valor}`;
+            document.getElementById('outputUsuario').className = "output highlight";
+            actualizarTodo();
+        }
+
+        // 4. Eliminar propiedad
+        function eliminarPropiedad() {
+            const propiedad = prompt("Nombre de la propiedad a eliminar:", "telefono");
+            if (!propiedad) return;
+            
+            if (usuario.hasOwnProperty(propiedad)) {
+                delete usuario[propiedad];
+                document.getElementById('outputUsuario').textContent = `Propiedad "${propiedad}" eliminada`;
+                document.getElementById('outputUsuario').className = "output highlight";
+                actualizarTodo();
+            } else {
+                document.getElementById('outputUsuario').textContent = `La propiedad "${propiedad}" no existe en el objeto`;
+                document.getElementById('outputUsuario').className = "output";
+            }
+        }
+
+        // 5. Clonar objeto con spread
+        function clonarObjeto() {
+            clonUsuario = { ...usuario };
+            document.getElementById('outputClon').textContent = "Objeto clonado correctamente";
+            document.getElementById('outputClon').className = "output highlight";
+            actualizarTodo();
+        }
+
+        // 6. Mostrar clon
+        function mostrarClon() {
+            const output = document.getElementById('outputClon');
+            if (Object.keys(clonUsuario).length === 0) {
+                output.textContent = "Aun no se ha clonado ningun objeto";
+                output.className = "output";
+                return;
+            }
+            output.innerHTML = formatearObjeto(clonUsuario);
+            output.className = "output highlight";
+        }
+
+        // 7. Fusionar objetos
+        function fusionarObjetos() {
+            objetoFusionado = { ...usuario, ...objetoExtra };
+            document.getElementById('outputFusion').textContent = "Objetos fusionados correctamente";
+            document.getElementById('outputFusion').className = "output highlight";
+            actualizarTodo();
+        }
+
+        // 8. Mostrar fusion
+        function mostrarFusion() {
+            const output = document.getElementById('outputFusion');
+            if (Object.keys(objetoFusionado).length === 0) {
+                output.textContent = "Aun no se ha fusionado ningun objeto";
+                output.className = "output";
+                return;
+            }
+            output.innerHTML = formatearObjeto(objetoFusionado);
+            output.className = "output highlight";
+        }
+
+        // 9. Iterar objeto
+        function iterarObjeto() {
+            const output = document.getElementById('outputIteracion');
+            let texto = "=== Iteracion con for...in ===\n";
+            for (let key in usuario) {
+                if (usuario.hasOwnProperty(key)) {
+                    texto += `${key}: ${usuario[key]}\n`;
+                }
+            }
+            
+            texto += "\n=== Object.keys() ===\n";
+            texto += `Claves: ${Object.keys(usuario).join(', ')}\n`;
+            
+            texto += "\n=== Object.values() ===\n";
+            texto += `Valores: ${Object.values(usuario).map(v => typeof v === 'object' ? JSON.stringify(v) : v).join(', ')}\n`;
+            
+            texto += "\n=== Object.entries() ===\n";
+            Object.entries(usuario).forEach(([key, value]) => {
+                texto += `[${key}] => ${typeof value === 'object' ? JSON.stringify(value) : value}\n`;
+            });
+            
+            output.textContent = texto;
+            output.className = "output highlight";
+        }
+
+        // 10. Contar propiedades
+        function contarPropiedades() {
+            const output = document.getElementById('outputIteracion');
+            const count = Object.keys(usuario).length;
+            const keys = Object.keys(usuario).join(', ');
+            output.textContent = `El objeto tiene ${count} propiedades: ${keys}`;
+            output.className = "output highlight";
+        }
+
+        // 11. Verificar propiedad
+        function verificarPropiedad() {
+            const prop = prompt("Propiedad a verificar:", "nombre");
+            if (!prop) return;
+            
+            const output = document.getElementById('outputIteracion');
+            if (usuario.hasOwnProperty(prop)) {
+                output.textContent = `La propiedad "${prop}" existe con valor: ${usuario[prop]}`;
+                output.className = "output highlight";
+            } else {
+                output.textContent = `La propiedad "${prop}" NO existe en el objeto`;
+                output.className = "output";
+            }
+        }
+
+        // 12. Agregar propiedad personalizada
+        function agregarPropiedadPersonalizada() {
+            const campo = document.getElementById('campoNuevo').value.trim();
+            const valor = document.getElementById('valorNuevo').value.trim();
+            
+            if (!campo) {
+                document.getElementById('outputAvanzado').textContent = "Error: Ingresa un nombre para la propiedad";
+                document.getElementById('outputAvanzado').className = "output";
+                return;
+            }
+            
+            usuario[campo] = valor || "Sin valor";
+            document.getElementById('outputAvanzado').textContent = `Propiedad "${campo}" agregada con valor: ${valor || "Sin valor"}`;
+            document.getElementById('outputAvanzado').className = "output highlight";
+            document.getElementById('campoNuevo').value = '';
+            document.getElementById('valorNuevo').value = '';
+            actualizarTodo();
+        }
+
+        // 13. Transformar objeto
+        function transformarObjeto() {
+            const output = document.getElementById('outputAvanzado');
+            
+            // Crear un nuevo objeto transformado
+            const transformado = {};
+            Object.entries(usuario).forEach(([key, value]) => {
+                if (typeof value === 'string') {
+                    transformado[key] = value.toUpperCase();
+                } else if (typeof value === 'number') {
+                    transformado[key] = value * 2;
+                } else if (Array.isArray(value)) {
+                    transformado[key] = [...value, "Transformado"];
+                } else {
+                    transformado[key] = value;
+                }
+            });
+            
+            // Reemplazar el objeto original
+            usuario = transformado;
+            output.textContent = "Objeto transformado: strings a mayusculas, numeros doblados, arrays con nuevo elemento";
+            output.className = "output highlight";
+            actualizarTodo();
+        }
+
+        // 14. Resetear objeto
+        function resetearObjeto() {
+            usuario = {
+                nombre: "Carlos",
+                edad: 28,
+                ciudad: "Madrid",
+                profesion: "Desarrollador",
+                habilidades: ["JavaScript", "Python", "SQL"],
+                activo: true
+            };
+            clonUsuario = {};
+            objetoFusionado = {};
+            document.getElementById('outputAvanzado').textContent = "Objeto reseteado a valores iniciales";
+            document.getElementById('outputAvanzado').className = "output highlight";
+            actualizarTodo();
+        }
+
+        // 15. Mostrar todo
+        function mostrarTodo() {
+            const output = document.getElementById('outputAvanzado');
+            let texto = "=== ESTADO ACTUAL DEL OBJETO ===\n\n";
+            texto += formatearObjeto(usuario);
+            output.innerHTML = texto;
+            output.className = "output highlight";
+        }
+
+        // ===== FUNCIONES AUXILIARES =====
+
+        // Formatear objeto para visualizacion
+        function formatearObjeto(obj) {
+            let html = '<div class="object-display">\n';
+            Object.entries(obj).forEach(([key, value]) => {
+                let valorStr;
+                let tipo = typeof value;
+                if (value === null) {
+                    valorStr = 'null';
+                    tipo = 'null';
+                } else if (Array.isArray(value)) {
+                    valorStr = `[${value.map(v => typeof v === 'string' ? `"${v}"` : v).join(', ')}]`;
+                    tipo = 'array';
+                } else if (typeof value === 'string') {
+                    valorStr = `"${value}"`;
+                } else if (typeof value === 'object') {
+                    valorStr = JSON.stringify(value);
+                } else {
+                    valorStr = String(value);
+                }
+                html += `  <span class="key">${key}</span>: <span class="value">${valorStr}</span> <span class="type">(${tipo})</span>\n`;
+            });
+            html += '</div>';
+            return html;
+        }
+
+        // Actualizar todos los displays
+        function actualizarTodo() {
+            // Actualizar outputUsuario
+            document.getElementById('outputUsuario').innerHTML = formatearObjeto(usuario);
+            
+            // Actualizar clon si existe
+            if (Object.keys(clonUsuario).length > 0) {
+                document.getElementById('outputClon').innerHTML = formatearObjeto(clonUsuario);
+            }
+            
+            // Actualizar fusion si existe
+            if (Object.keys(objetoFusionado).length > 0) {
+                document.getElementById('outputFusion').innerHTML = formatearObjeto(objetoFusionado);
+            }
+        }
+
+        // Inicializar mostrando el usuario
+        window.onload = function() {
+            document.getElementById('outputUsuario').innerHTML = formatearObjeto(usuario);
+            document.getElementById('outputUsuario').className = "output highlight";
+        };
+    </script>
+</body>
+</html>
