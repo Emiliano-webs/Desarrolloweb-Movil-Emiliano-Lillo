@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo API Gateway</title>
+</head>
+<body>
+  <h1>Demo API Gateway</h1>
+
+  <section id="seccion-login">
+    <form id="form-login">
+      <input id="usuario" value="mimi" required>
+      <input id="clave" type="password" value="1234" required>
+      <button type="submit">Iniciar sesión</button>
+    </form>
+    <p id="estado-login"></p>
+  </section>
+
+  <section id="seccion-productos" hidden>
+    <form id="form-producto">
+      <input id="nombre" placeholder="Nombre" required>
+      <input id="precio" type="number" placeholder="Precio" required>
+      <button type="submit">Agregar producto</button>
+    </form>
+    <p id="estado-productos"></p>
+    <ul id="lista"></ul>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
