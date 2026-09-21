@@ -1,0 +1,321 @@
+
+/* Paleta de colores */
+:root {
+  --verde-1: #F7FEEF;
+  --verde-2: #CBDDB5;
+  --verde-3: #A8CA7E;
+  --verde-4: #97B770;
+  --verde-5: #608334;
+  --texto:   #26380F;
+}
+
+/*base*/
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "Nunito", system-ui, sans-serif;
+  color: var(--texto);
+  background: var(--verde-1);
+  line-height: 1.5;
+}
+
+h1, h2, h3 { font-family: "Fraunces", Georgia, serif; }
+
+button { font-family: inherit; cursor: pointer; }
+
+:focus-visible { outline: 3px solid var(--verde-5); outline-offset: 2px; }
+
+/* Botón principal (Agregar, Ver el menú) */
+.btn-principal {
+  display: inline-block;
+  border: 0;
+  border-radius: 999px;
+  padding: .65rem 1.3rem;
+  background: var(--verde-5);
+  color: var(--verde-1);
+  font-weight: 800;
+  text-decoration: none;
+}
+.btn-principal:hover { filter: brightness(1.12); }
+
+/* encabezado de la pagina*/
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .6rem 1rem;
+  background: var(--verde-4);
+  color: var(--texto);
+}
+
+/* El logo del encabezado se oculta en móvil (ahí va la flecha) */
+.logo-header { display: none; }
+
+.btn-subir {
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--verde-5);
+  color: var(--verde-1);
+  font-size: 1.4rem;
+}
+
+.topbar__acciones { display: flex; align-items: center; gap: 1rem; }
+
+/* "color: inherit" hace que los botones usen el color del encabezado */
+.btn-texto, .btn-carrito {
+  border: 0;
+  background: none;
+  color: inherit;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+/* Contador del carrito con forma de "píldora" */
+#contador-carrito {
+  display: inline-block;
+  min-width: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--verde-1);
+  color: var(--verde-5);
+  font-size: .85rem;
+  line-height: 22px;
+  text-align: center;
+}
+ 
+/* Navegacion de la pagina */
+
+.nav {
+  display: flex;
+  gap: 1.5rem;
+  padding: .7rem 1rem;
+  background: var(--verde-3);
+}
+.nav a { color: var(--texto); font-weight: 800; text-decoration: none; }
+.nav a:hover { text-decoration: underline; }
+
+/*Hero de la pagina*/
+
+
+/* productos y promos como se veran */
+
+.productos { padding: 1.5rem 1rem; background: var(--verde-2); }
+.promos    { padding: 1.5rem 1rem; background: var(--verde-4); }
+
+.productos h2,
+.promos h2 { margin: 0 0 1rem; font-size: 1.6rem; }
+
+/* Filtros: Todos / Bowls / Wraps / Ensaladas */
+.filtros { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.2rem; }
+
+.filtro {
+  border: 2px solid var(--verde-5);
+  border-radius: 999px;
+  padding: .4rem 1rem;
+  background: transparent;
+  color: var(--verde-5);
+  font-weight: 800;
+}
+.filtro.activo { background: var(--verde-5); color: var(--verde-1); }
+
+/* Fila de productos: en móvil se desliza hacia el lado */
+.productos__fila {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: .3rem .3rem 1rem;
+  scroll-snap-type: x mandatory;
+}
+
+.tarjeta {
+  flex: 0 0 70%;             /* cada tarjeta ocupa el 70% del ancho */
+  max-width: 260px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  padding: 1rem;
+  border-radius: 14px;
+  background: var(--verde-1);
+  box-shadow: 0 6px 18px rgb(38 56 15 / .12);
+  transition: transform .2s;
+}
+.tarjeta:hover { transform: translateY(-4px); }
+
+.tarjeta h3 { margin: .3rem 0 0; font-size: 1.15rem; }
+.tarjeta p  { margin: 0; font-size: .95rem; }
+.tarjeta .btn-principal { margin-top: auto; align-self: flex-start; }
+
+.tarjeta__imagen {
+  width: 100%;
+  aspect-ratio: 4 / 3;       /* todas las fotos del mismo tamaño */
+  object-fit: cover;         /* recorta en vez de deformar */
+  border-radius: 10px;
+}
+
+.tarjeta__precio { font-size: 1.1rem !important; font-weight: 800; }
+
+/* Promos */
+.promos__lista { display: grid; gap: 1rem; }
+
+.promo {
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--verde-1);
+  box-shadow: 0 6px 18px rgb(38 56 15 / .12);
+  transition: transform .2s;
+}
+.promo:hover { transform: translateY(-4px); }
+
+.promo img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.promo__texto { padding: 1rem; }
+.promo h3 { margin: .5rem 0 .3rem; }
+.promo p  { margin: 0; }
+
+.promo__etiqueta {
+  display: inline-block;
+  padding: .15rem .7rem;
+  border-radius: 999px;
+  background: var(--verde-5);
+  color: var(--verde-1);
+  font-size: .85rem;
+  font-weight: 800;
+}
+
+/* Pie de pagina */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 1rem;
+}
+.footer h2 { margin: 0; font-size: 1.3rem; }
+.footer p  { margin: .2rem 0 0; }
+
+/* Logo del pie (ajusta la altura si lo quieres más grande o más chico) */
+.logo { height: 56px; width: auto; }
+
+.btn-principal:disabled { opacity: .5; cursor: not-allowed; }
+
+.dialogo {
+  width: min(92vw, 420px);
+  height: 100%;
+  max-height: 100%;
+  margin: 0 0 0 auto;              /* pegado a la derecha */
+  padding: 0;                      /* el relleno va en .dialogo__contenido */
+  border: 0;
+  border-radius: 14px 0 0 14px;
+  background: var(--verde-1);
+  color: var(--texto);
+}
+.dialogo::backdrop { background: rgb(38 56 15 / .55); }
+
+.dialogo__contenido { padding: 1.2rem; }
+
+.dialogo__cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.dialogo__cabecera h2 { margin: 0; }
+
+.btn-cerrar {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--verde-2);
+  color: var(--texto);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: .2rem 1rem;
+  padding: .8rem 0;
+  border-bottom: 1px solid var(--verde-2);
+}
+.item__controles { display: flex; align-items: center; gap: .5rem; }
+.item__controles button {
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--verde-3);
+  color: var(--texto);
+  font-weight: 800;
+}
+
+.vacio { color: var(--verde-5); font-weight: 600; }
+.carrito__total { margin: 1rem 0; font-size: 1.2rem; }
+
+/* Ventana centrada (para el login). El carrito sigue lateral. */
+.dialogo--centro {
+  height: auto;
+  max-height: 90vh;
+  margin: auto;
+  border-radius: 14px;
+}
+
+/* Formularios */
+.form { display: grid; gap: .5rem; }
+.form label { font-weight: 800; }
+.form input {
+  padding: .65rem .8rem;
+  border: 2px solid var(--verde-3);
+  border-radius: 10px;
+  background: #fff;
+  font: inherit;
+  color: var(--texto);
+}
+.form .btn-principal { margin-top: .5rem; }
+
+/* Visualización de la pagina web  */
+
+@media (min-width: 768px) {
+  .topbar {
+    justify-content: flex-end;
+    background: var(--verde-5);
+    color: var(--verde-1);
+  }
+  .btn-subir { display: none; }
+
+  /* Logo del encabezado: aparece a la izquierda */
+  .logo-header {
+    display: block;
+    height: 44px;              /* <- cambia este número para el tamaño */
+    width: auto;
+    margin-right: auto;
+  }
+
+  .productos__fila {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);   /* 3 columnas */
+    overflow: visible;
+    padding: 0;
+  }
+  .tarjeta { flex: none; max-width: none; }
+
+  .promos__lista { grid-template-columns: repeat(3, 1fr); }
+
+  /* Contenido centrado (máx. 1100px) en pantallas muy anchas;
+     los fondos de color siguen ocupando todo el ancho */
+  .topbar, .nav, .hero, .productos, .promos, .footer {
+    padding-left: max(2rem, calc((100% - 1100px) / 2));
+    padding-right: max(2rem, calc((100% - 1100px) / 2));
+  }
+}
+
+/* Menos movimiento para quien lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .tarjeta, .promo { transition: none; }
+}
