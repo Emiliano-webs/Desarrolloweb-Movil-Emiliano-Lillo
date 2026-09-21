@@ -1,0 +1,152 @@
+-Caso 21 Bowling Health-
+
+Página web front-end de una tienda de comida sana (bowls, wraps y ensaladas), con diseño adaptable a celular y computador, menú filtrable por categoría, carrito de compras y una ventana de Log In simulada.
+
+Está hecha solo con HTML, CSS y JavaScript, sin librerías ni frameworks, como proyecto de aprendizaje de desarrollo web.
+
+
+--Contenido
+
+1. [Funcionalidades]
+2. [Tecnologías]
+3. [Estructura del proyecto]
+4. [Cómo ejecutarlo]
+5. [Cómo funciona por dentro]
+6. [Diseño]
+7. [Cómo personalizarlo]
+8. [Limitaciones]
+9. [Próximas mejoras]
+10. [Autoría]
+
+---
+
+--Funcionalidades
+
+- Diseño responsivo: una versión para celular y otra para pantallas grandes, basadas en un boceto propio con paleta de colores preselccionada.
+
+- Menú de productos generado con JavaScript a partir de una lista de datos, con foto, descripción y precio en pesos chilenos.
+
+- Filtros por categoría: Filtros por los tipos de productos que se ofrecen Todos, Bowls, Wraps y Ensaladas.
+
+- Carrito de compras: Capacidades y acciones dentro del carrito:
+  - agregar productos y cambiar cantidades con los botones + y −;
+  - total calculado automáticamente y contador en el ícono del carrito;
+  - vaciar el carrito;
+  - el carrito se conserva al recargar la página (`localStorage`).
+
+- Log In simulado: formulario con validación; al iniciar sesión, el botón muestra el nombre del usuario y permite salir. Aun no se implementa con una base de datos en linea ya que requiere una implementación mayor que solo front-end.
+
+- Botón "volver arriba" en la versión móvil.
+
+- Navegación suave entre secciones.
+
+
+--Tecnología
+
+HTML5: Estructura semántica (`header`, `nav`, `main`, `section`, `footer`) y ventanas emergentes con `<dialog>` |
+CSS3: Variables, Flexbox, Grid, *media queries*, sombras y transiciones |
+JavaScript (ES6+): Renderizado dinámico, eventos, manejo de datos y `localStorage` |
+Google Fonts: Tipografías *Fraunces* (títulos) y *Nunito* (texto) |
+
+--Estructura del proyecto
+
+```
+mi-pagina/
+├── index.html -> Estructura de la página
+├── styles.css -> Estilos y diseño responsivo
+├── script.js -> Lógica: productos, filtros, carrito y login
+├── img/ -> carpeta con las imágenes que se hacen referencia               
+│   ├── logo.png
+│   ├── bowl-mediterraneo.jpg
+│   ├── bowl-poke.jpg
+│   ├── wrap-pollo.jpg
+│   ├── wrap-vegetariano.jpg
+│   ├── ensalada-cesar.jpg
+│   └── ensalada-verde.jpg
+└── README.md
+```
+
+El archivo principal debe llamarse `index.html` en minúsculas. GitHub Pages y muchos servidores distinguen mayúsculas de minúsculas y no lo encontrarían como `Index.html`.
+
+--Cómo ejecutarlo
+ con Live Server 
+1. Abre la carpeta en Visual Studio Code.
+2. Instala la extensión Live Serve.
+3. Clic derecho sobre "index.html" -> Open with Live Server.
+
+La página se recarga sola cada vez que guardas un cambio.
+
+La cual es la que se utilizo para la programación de la pagina
+
+
+
+-- Cómo funciona por dentro
+
+-"index.html": la estructura de la página  donde. Divide la página en bloques que siguen el boceto: encabezado con logo, Log In y carrito; barra de navegación; sección de productos con filtros; sección de promos; y pie de página. Los productos, el contenido del carrito y las promos se dejan como contenedores vacíos que rellena JavaScript. También incluye dos ventanas `<dialog>`: el carrito (panel lateral) y el Log In (centrada).
+
+-"styles.css": el diseño y paleta de colores de la pagina como se ve cada imagen y tarjeta de los productos
+
+-"Variables CSS": la paleta de colores está guardada en :root como --verde-1 a --verde-5, y todo el sitio la reutiliza.
+- Mobile first: los estilos base son los del celular (los productos se deslizan de lado). Un @media (min-width: 768px) adapta el diseño para pantallas grandes (3 columnas y logo en el encabezado).
+
+-"Fotos uniformes": aspect-ratio y object-fit: cover hacen que todas las imágenes tengan el mismo tamaño sin deformarse.
+-"Detalles de interfaz": sombras suaves, efecto al pasar el mouse, contenido centrado con un máximo de 1100 px y respeto por `prefers-reduced-motion`.
+
+"script.js": la lógica  la cual se basa la pagina y como funcionara
+
+1. Datos. Los productos viven en una lista de objetos:
+
+js
+{ id: 1, categoria: "bowls", nombre: "Bowl Poke", descripcion: "...", precio: 7490, imagen: "img/bowl-poke.jpg" }
+
+
+2. Renderizado dinámico. mostrarProductos(categoria) limpia el contenedor, filtra la lista según la categoría y dibuja una tarjeta por producto. Los filtros solo vuelven a llamar a esa función.
+
+3. Carrito. Es una lista de { id, cantidad }. Solo se guarda el id, y el nombre y el precio se buscan en la lista de productos, así que un cambio de precio se refleja solo. Las funciones principales son:
+
+ agregarAlCarrito(id)  Suma 1 si el producto ya está; si no, lo agrega 
+ cambiarCantidad(id, cambio)  Sube o baja la cantidad; con 0, quita el producto 
+ actualizarCarrito()  Redibuja el panel, calcula el total y actualiza el contador 
+ formatearPrecio(n)  Da formato de moneda chilena (`$6.990`) 
+
+4. Delegación de eventos. Como las tarjetas y los ítems del carrito se crean con JavaScript, el addEventListener se coloca en el contenedor y closest("[data-agregar]") identifica en qué botón se hizo clic. Cada botón lleva el `id` de su producto en un atributo data-*.
+
+5. Persistencia. El carrito y el usuario se guardan en localStorage con JSON.stringify y se recuperan con JSON.parse dentro de un try/catch, para que la página no falle si el navegador bloquea el almacenamiento.
+
+6. Ventanas emergentes. Se abren con showModal() y se cierran con la ✕, con la tecla Esc o haciendo clic en el fondo oscuro.
+
+7. Log In simulado. El formulario se valida con los atributos nativos del HTML (type="email", required, minlength). Al enviarlo, preventDefault() evita que la página se recargue y se guarda un usuario con el nombre tomado del correo. El botón cambia a "Hola, nombre · Salir".
+
+
+-- Personalización
+
+-Agregar o cambiar un producto: edita la lista productos al inicio de script.js y guarda su foto en img/. El id de cada producto debe ser único.
+
+-Cambiar los colores: modifica las variables de :root al inicio de styles.css.
+
+-Cambiar el logo: reemplaza img/logo.png. Si tiene otro nombre o formato, actualiza la ruta en las etiquetas <img> del index.html.
+
+-Ajustar el tamaño del logo: cambia height en .logo y .logo-header en styles.css.
+
+--Limitaciones
+
+- Es un proyecto solo de front-end: no hay servidor ni base de datos.
+- El Log In es simulado: acepta cualquier correo válido con una contraseña de 6 o más caracteres, y no comprueba nada contra un servidor. La contraseña no se guarda. Sirve para practicar la interfaz, no para proteger datos reales.
+- El carrito vive en el navegador de cada persona; no se comparte entre dispositivos ni se puede "pagar".
+- La sección de Promos ya tiene su espacio en la página, pero todavía no muestra contenido.
+
+--Próximas mejoras
+
+-  Mostrar las promos con imagen (contenido dinámico, igual que los productos).
+-  Conectar el Log In a una **API con autenticación (JWT)**.
+-  Guardar los pedidos en una base de datos.
+-  Agregar un mapa de Google Maps con la ubicación del local.
+-  Buscador de platos y página de detalle de cada producto.
+
+-- Autoría
+
+Proyecto creado por Emiliano Lillo para la solemne de desarrollo web front-end.
+
+Las fotos de los platos no son de mi autoría sacadas de Google.
+---
+Logo hecho por Emiliano Lillo

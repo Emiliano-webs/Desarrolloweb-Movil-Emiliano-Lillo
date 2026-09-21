@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--Titulo el cual ira en la pestaña de la pagina -->
+    <title>Bowling health</title>
+
+<!--Imagen logo en la pestaña de la pagina -->
+    <link rel="icon" type="image/png" href="img/logo.png">
+
+  <!-- Tipografías-->
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header class="topbar">
+        <img class="logo-header" src="img/logo.png" alt="Logo de mi tienda">
+        <button id="btn-subir" class="btn-subir">↑</button>
+        <div class="topbar__acciones">
+            <button id="btn-login" class="btn-texto" type="button">Log In</button>
+            <button id="btn-carrito" class="btn-carrito" type="button" aria-label="Abrir carrito">🛒 <span id="contador-carrito">0</span></button>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <a href="#menu">Menu</a>
+        <a href="#promos">Promos</a>
+    </nav>
+
+    <main>
+        <!-- productos!  -->
+        <section class="productos" id="menu">
+            <h2>Menu</h2>
+
+            <!-- Filtros por categoría -->
+            <div class="filtros">
+                <button class="filtro activo" data-categoria="todos">Todos</button>
+                <button class="filtro" data-categoria="bowls">Bowls</button>
+                <button class="filtro" data-categoria="wraps">Wraps</button>
+                <button class="filtro" data-categoria="ensaladas">Ensaladas</button>
+            </div>
+
+            <div id="lista-productos" class="productos__fila"></div>
+        </section>
+
+        <section class="promos" id="promos">
+            <h2>Promos</h2>
+            <!--  JavaScript dibuja las promos -->
+            <div id="lista-promos" class="promos__lista"></div>
+        </section>
+    </main>
+
+    <!-- Footer iria la ubicación si supiera como hacerlo -->
+    <footer class="footer">
+        <div>
+            <h2>Ubicación</h2>
+            <p>Tu dirección aquí</p>
+        </div>
+    </footer>
+
+ <!--  Carrito!!  -->
+<dialog id="dlg-carrito" class="dialogo" aria-labelledby="carrito-titulo">
+    <div class="dialogo__contenido">
+        <div class="dialogo__cabecera">
+            <h2 id="carrito-titulo">Tu carrito</h2>
+            <button type="button" class="btn-cerrar" data-cerrar aria-label="Cerrar carrito">✕</button>
+        </div>
+
+        <div id="items-carrito"></div>
+
+        <p class="carrito__total">Total: <strong id="total-carrito">$0</strong></p>
+        <button type="button" class="btn-principal" id="btn-vaciar">Vaciar carrito</button>
+    </div>
+</dialog>
+
+/* Login!!  */
+<dialog id="dlg-login" class="dialogo dialogo--centro" aria-labelledby="login-titulo">
+    <div class="dialogo__contenido">
+        <div class="dialogo__cabecera">
+            <h2 id="login-titulo">Iniciar sesión</h2>
+            <button type="button" class="btn-cerrar" data-cerrar aria-label="Cerrar">✕</button>
+        </div>
+
+        <form id="form-login" class="form">
+            <label for="correo">Correo</label>
+            <input id="correo" type="email" required autocomplete="email">
+
+            <label for="clave">Contraseña</label>
+            <input id="clave" type="password" required minlength="6" autocomplete="current-password">
+
+            <button type="submit" class="btn-principal">Entrar</button>
+        </form>
+    </div>
+</dialog>
+
+    <script src="script.js"> </script>
+
+</body>
+</html>
