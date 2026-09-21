@@ -2,7 +2,7 @@
 
 Página web front-end de una tienda de comida sana (bowls, wraps y ensaladas), con diseño adaptable a celular y computador, menú filtrable por categoría, carrito de compras y una ventana de Log In simulada.
 
-Está hecha solo con HTML, CSS y JavaScript, sin librerías ni frameworks, como proyecto de aprendizaje de desarrollo web.
+Está hecha solo con HTML, CSS y JavaScript, como proyecto de aprendizaje de desarrollo web.
 
 
 --Contenido
@@ -10,13 +10,11 @@ Está hecha solo con HTML, CSS y JavaScript, sin librerías ni frameworks, como 
 1. [Funcionalidades]
 2. [Tecnologías]
 3. [Estructura del proyecto]
-4. [Cómo ejecutarlo]
-5. [Cómo funciona por dentro]
-6. [Diseño]
-7. [Cómo personalizarlo]
-8. [Limitaciones]
-9. [Próximas mejoras]
-10. [Autoría]
+4. [Cómo funciona por dentro]
+5. [Personalización]
+6. [Limitaciones]
+7. [Próximas mejoras]
+8. [Autoría]
 
 ---
 
