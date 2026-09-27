@@ -1,0 +1,56 @@
+# API "normal": solo confía en peticiones que traigan el secreto del gateway.
+from fastapi import FastAPI, Header, HTTPException
+from pydantic import BaseModel
+from typing import Optional
+
+app = FastAPI(title="Backend")
+
+GATEWAY_SECRET_ESPERADO = "gateway-api-secret-456"  # debe ser igual al que guardaste en Vault
+
+
+class Producto(BaseModel):
+    nombre: str
+    precio: float
+
+
+productos = {
+    1: {"id": 1, "nombre": "Teclado", "precio": 15000},
+    2: {"id": 2, "nombre": "Mouse", "precio": 8000},
+}
+siguiente_id = 3
+
+
+def verificar_gateway(x_gateway_secret: Optional[str]):
+    # Si esto falla, alguien intentó llamar a la API sin pasar por el gateway
+    if x_gateway_secret != GATEWAY_SECRET_ESPERADO:
+        raise HTTPException(status_code=403, detail="Acceso directo no permitido, usa el gateway")
+
+
+@app.get("/products")
+def listar_productos(x_gateway_secret: Optional[str] = Header(default=None)):
+    verificar_gateway(x_gateway_secret)
+    return list(productos.values())
+
+
+@app.post("/products")
+def crear_producto(producto: Producto, x_gateway_secret: Optional[str] = Header(default=None)):
+    verificar_gateway(x_gateway_secret)
+    global siguiente_id
+    nuevo = {"id": siguiente_id, **producto.model_dump()}
+    productos[siguiente_id] = nuevo
+    siguiente_id += 1
+    return nuevo
+
+
+@app.delete("/products/{producto_id}")
+def eliminar_producto(producto_id: int, x_gateway_secret: Optional[str] = Header(default=None)):
+    verificar_gateway(x_gateway_secret)
+    if producto_id not in productos:
+        raise HTTPException(status_code=404, detail="Producto no encontrado")
+    del productos[producto_id]
+    return {"ok": True}
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=9000)
